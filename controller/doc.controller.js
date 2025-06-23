@@ -20,16 +20,19 @@ export const docController = {
   update: async (req, res, next) => {
     try {
       const { id } = req.user;
-      const { username } = req.body;
+      const { username, specialization } = req.body;
       const user = await prisma.doctor.update({
         where: {
           id: Number(id),
         },
         data: {
           username: username,
+          specialization: specialization,
         },
       });
-      res.json({ result: user.username });
+      res.json({
+        result: { user: user.username, specialization: user.specialization },
+      });
     } catch (error) {
       next(error);
     }

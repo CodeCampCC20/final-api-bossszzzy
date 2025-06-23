@@ -6,5 +6,6 @@ const userRouter = express.Router()
 
 userRouter.get("/users/me",authCheckUser,userController.getMe)
 userRouter.patch("/users/me",authCheckUser,userController.update)
+userRouter.post("/health-records",authCheckUser,userController.healthRecord)
 
 export default userRouter

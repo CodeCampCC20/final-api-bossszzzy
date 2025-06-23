@@ -34,4 +34,21 @@ export const userController = {
       next(error);
     }
   },
+  healthRecord: async (req, res, next) => {
+    try {
+      const { type, value } = req.body;
+      const result = await prisma.healthRecord.create({
+        data: {
+          type,
+          value,
+          userId: req.user.id,
+        },
+      });
+      res
+        .status(201)
+        .json({ message: "create health record successfully", result });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
